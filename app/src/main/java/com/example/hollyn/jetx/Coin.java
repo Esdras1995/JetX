@@ -18,12 +18,13 @@ public class Coin {
     private static int height;
     private int ySpeed;
     private List<Coin> temps;
+    GameSound sound;
 
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 * ////////////////////////////////////////////                  CONSTRUCTOR                    ///////////////////////////////////////////////////
 * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-public Coin(List<Coin> temps, GameView gameView, float x, float y, Bitmap bitmap){
+public Coin(List<Coin> temps, GameView gameView, float x, float y, Bitmap bitmap, GameSound sound){
     this.gameView = gameView;
     bmp = bitmap;
     width = bitmap.getWidth();
@@ -32,6 +33,7 @@ public Coin(List<Coin> temps, GameView gameView, float x, float y, Bitmap bitmap
     this.y = (int) y;
     ySpeed = 15;
     this.temps = temps;
+    this.sound = sound;
 }
 
 /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,6 +43,7 @@ public Coin(List<Coin> temps, GameView gameView, float x, float y, Bitmap bitmap
     public void update(){
         if((y + height >= Avion.getY() && y <= Avion.getY() + Avion.getHeight()
                 && x + width >= Avion.getX() && x <= Avion.getX() + Avion.getWidth())){
+            sound.playSound("Coin");
             temps.remove(this);
             Joueur.gainCoin();
         }

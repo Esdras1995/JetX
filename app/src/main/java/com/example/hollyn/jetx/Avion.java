@@ -53,6 +53,11 @@ public class Avion {
             Avion.y = y;
     }
 
+    public static void ExplodeAll(){
+        for (int i=1; i<=4; i++) {
+            view.boom(i);
+        }
+    }
     public static int getX(){
         return x;
     }

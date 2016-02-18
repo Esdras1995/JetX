@@ -6,12 +6,14 @@ package com.example.hollyn.jetx;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -20,14 +22,10 @@ import android.widget.ToggleButton;
  * Created by root on 3/29/15.
  */
 public class Option extends Activity {
-
-    SeekBar smu, sfx;
-    AudioManager am;
-    Button btnSave;
-    TextView log;
-    private int progrssSmu, progrssSfx, maxVol = 15;
-    GameSound music, fx;
-    //public static boolean ischeckedMusic, checkFx;
+    ImageButton checkMusic, checkFx, credits;
+    private boolean mu, sfx;
+    public static boolean PAUSE = true;
+    GameSound sound = new GameSound(ContentMenu.getMenuContext());
 
 
     @Override
@@ -35,114 +33,156 @@ public class Option extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.option_layout);
 
-        btnSave = (Button)findViewById(R.id.save);
 
-        am = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-
-        maxVol = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-
-        int curVol = am.getStreamVolume(AudioManager.STREAM_MUSIC);
-
-        progrssSmu = progrssSfx = maxVol;
-
-        log = (TextView)findViewById(R.id.log);
-
-        smu = (SeekBar)findViewById(R.id.volumeMusic);
-
-        sfx = (SeekBar)findViewById(R.id.fxVolume);
-
-        smu.setMax(maxVol);
-
-        sfx.setMax(maxVol);
-
-        smu.setProgress(curVol);
-
-        sfx.setProgress(curVol);
-
-        smu.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                //am.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
-                progrssSmu = smu.getProgress();
-
-                float volume = (float)progrssSmu/maxVol;
-
-                log.setText(volume+"");
-
-                music.setMusicVolume(volume, volume);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-
-        });
-
-        sfx.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-                //am.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
-                progrssSfx = sfx.getProgress();
-
-                //float volume = (float)progrssSfx/maxVol;
-
-                log.setText(progrssSfx+"");
-
-                // music.setMusicVolume(volume, volume);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-
-        });
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                savePreferences("progress_music", progrssSmu);
-
-                savePreferences("progress_fx", progrssSfx);
-
-                finish();
-            }
-        });
+        checkMusic = (ImageButton)findViewById(R.id.music);
+        checkFx = (ImageButton)findViewById(R.id.sfx);
+        credits = (ImageButton)findViewById(R.id.credits);
 
         loadPreferences();
+        checkSound();
+
+        checkMusic.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                int sdk = android.os.Build.VERSION.SDK_INT;
+
+                if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    if (mu == true){
+                        checkMusic.setBackgroundDrawable(getResources().getDrawable(R.drawable.left_none_check));
+                        savePreferences("music", false);
+                       // if(!sound.isPlayingMusic())
+                            //ContentMenu.play();
+                        ContentMenu.pause();
+                        mu = false;
+
+                    }else{
+                        checkMusic.setBackgroundDrawable(getResources().getDrawable(R.drawable.left_check));
+                        savePreferences("music", true);
+                        mu = true;
+                        ContentMenu.play(true);
+                    }
+                }else {
+
+                    if (mu == true){
+                        checkMusic.setBackground(getResources().getDrawable(R.drawable.left_none_check));
+                        savePreferences("music", false);
+                        ContentMenu.pause();
+                        mu = false;
+                    }
+                    else{
+                        checkMusic.setBackground(getResources().getDrawable(R.drawable.left_check));
+                        savePreferences("music", true);
+                        ContentMenu.play(true);
+                        mu = true;
+                    }
+                }
+
+
+            }
+        });
+
+        checkFx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int sdk = android.os.Build.VERSION.SDK_INT;
+                if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                    if (sfx == true) {
+                        checkFx.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_none_check));
+                        savePreferences("sfx", false);
+                        sfx = false;
+                    }
+                    else {
+                        checkFx.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_check));
+                        savePreferences("sfx", true);
+                        sfx = true;
+                    }
+                } else {
+
+                    if (sfx == true){
+                        checkFx.setBackground(getResources().getDrawable(R.drawable.right_none_check));
+                        savePreferences("sfx", false);
+                        sfx = false;
+                    }
+                    else{
+                        checkFx.setBackground(getResources().getDrawable(R.drawable.right_check));
+                        savePreferences("sfx", true);
+                        sfx = true;
+                    }
+                }
+            }
+        });
+
+        credits.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent menuIntent = new Intent(Option.this, Credits.class);
+                startActivity(menuIntent);
+            }
+        });
     }
 
+    public void checkSound(){
+
+        int sdk = android.os.Build.VERSION.SDK_INT;
+
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            if (mu == true)
+                checkMusic.setBackgroundDrawable(getResources().getDrawable(R.drawable.left_check));
+            else
+                checkMusic.setBackgroundDrawable(getResources().getDrawable(R.drawable.left_none_check));
+        } else {
+
+            if (mu == true)
+                checkMusic.setBackground(getResources().getDrawable(R.drawable.left_check));
+            else
+                checkMusic.setBackground(getResources().getDrawable(R.drawable.left_none_check));
+        }
+
+        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+            if (sfx == true)
+                checkFx.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_check));
+            else
+                checkFx.setBackgroundDrawable(getResources().getDrawable(R.drawable.right_none_check));
+        } else {
+
+            if (sfx == true)
+                checkFx.setBackground(getResources().getDrawable(R.drawable.right_check));
+            else
+                checkFx.setBackground(getResources().getDrawable(R.drawable.right_none_check));
+        }
+    }
     public void loadPreferences(){
 
         SharedPreferences sharedPreferences = getSharedPreferences("mdata", Context.MODE_PRIVATE);
 
-        progrssSmu = sharedPreferences.getInt("progress_music", maxVol);
+        mu = sharedPreferences.getBoolean("music", false);
 
-        progrssSfx = sharedPreferences.getInt("progress_fx", maxVol);
+        sfx = sharedPreferences.getBoolean("sfx", false);
 
-        //log.setText(progrss+"");
-
-        smu.setProgress(progrssSmu);
-        sfx.setProgress(progrssSfx);
     }
 
-    private void savePreferences(String key, int value){
+    private void savePreferences(String key, boolean value){
 
         SharedPreferences sharedPreferences = getSharedPreferences("mdata", Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putInt(key, value);
+        editor.putBoolean(key, value);
 
         editor.commit();
     }
 
-   /* public int getProgrss(){
-        return progrss;
-    }*/
+    @Override
+    public void onPause(){
+        super.onPause();
+        PAUSE = true;
+    }
+
+    @Override
+    public void onResume(){
+        super.onPause();
+        ContentMenu.play(true);
+    }
 
 }

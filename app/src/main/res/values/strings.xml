@@ -1,37 +1,9 @@
 <resources>
-    <string name="app_name">Jet X</string>
+    <string name="app_name">Aero Shooting</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="text">
-
-Thalassius vero ea tempestate praefectus praetorio praesens ipse quoque
-        adrogantis ingenii, considerans incitationem eius ad multorum augeri discrimina,
-        non maturitate vel consiliis mitigabat, ut aliquotiens celsae potestates iras principum molliverunt,
-        sed adversando iurgandoque cum parum congrueret, eum ad rabiem potius evibrabat, Augustum actus eius
-        exaggerando creberrime docens, idque, incertum qua mente, ne lateret adfectans. quibus mox Caesar
-        acrius efferatus, velut contumaciae quoddam vexillum altius erigens, sine respectu salutis alienae
-        vel suae ad vertenda opposita instar rapidi fluminis irrevocabili impetu ferebatur.\n\n\n\n
-
-Duplexque isdem diebus acciderat malum, quod et Theophilum insontem atrox interceperat casus,
-        et Serenianus dignus exsecratione cunctorum, innoxius, modo non reclamante publico vigore, discessit.
-
-Sed si ille hac tam eximia fortuna propter utilitatem rei publicae frui non properat, ut omnia
-        illa conficiat, quid ego, senator, facere debeo, quem, etiamsi ille aliud vellet, rei
-        publicae consulere oporteret?
-
-Ob haec et huius modi multa, quae cernebantur in paucis, omnibus timeri sunt coepta. et ne tot
-        malis dissimulatis paulatimque serpentibus acervi crescerent aerumnarum, nobilitatis decreto
-        legati mittuntur: Praetextatus ex urbi praefecto et ex vicario Venustus et ex consulari Minervius
-        oraturi, ne delictis supplicia sint grandiora, neve senator quisquam inusitato et inlicito more
-        tormentis exponeretur.
-
-Alii nullo quaerente vultus severitate adsimulata patrimonia sua in inmensum extollunt, cultorum
-        ut puta feracium multiplicantes annuos fructus, quae a primo ad ultimum solem se abunde
-        iactitant possidere, ignorantes profecto maiores suos, per quos ita magnitudo Romana
-        porrigitur, non divitiis eluxisse sed per bella saevissima, nec opibus nec victu nec
-        indumentorum vilitate gregariis militibus discrepantes opposita cuncta superasse virtute.
-</string>
+    <string name="text"></string>
 
     <string name="distance">Distance : </string>
     <string name="coin">Coins gained : </string>

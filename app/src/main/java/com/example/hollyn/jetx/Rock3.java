@@ -1,0 +1,135 @@
+package com.example.hollyn.jetx;
+
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.transition.Explode;
+import android.widget.TextView;
+
+import java.util.Random;
+
+/**
+ * Created by hollyn on 3/12/15.
+ */
+public class Rock3 {
+
+    private Bitmap bmp;
+    static int x;
+    static int y;
+    private static int var;
+    int xSpeed;
+    static int ySpeed;
+    static boolean destroy;
+    static int height;
+    static int width;
+    private static GameView v;
+    private static Random random = new Random();
+    private static int i;
+    private int life = 5;
+    private static boolean hit;
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+* ////////////////////////////////////////////                  CONSTRUCTOR                    ///////////////////////////////////////////////////
+* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+    public Rock3(GameView ourView, Bitmap bitmap){
+        v = ourView;
+        bmp = bitmap;
+        destroy = false;
+        xSpeed = 0;
+        ySpeed = 30;
+        height = bitmap.getHeight();
+        width = bitmap.getWidth();
+        y = - bmp.getHeight() - height;
+        hit = false;
+    }
+
+    /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    * /////////////////////////////////////////////////                  Update                   ///////////////////////////////////////////////////
+    * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+    private void update() {
+        if(y < v.getHeight() && destroy == false && hit == false) {
+            y += ySpeed;
+        }
+        else {
+            destroy = false;
+            hit = false;
+            y = -height * 2;
+            i = random.nextInt(v.getWidth()/width);
+        }
+        x = i * width;
+
+        if(Joueur.getRockdestroy() % 15 == 0 && Joueur.getRockdestroy() != 0 && Joueur.getRockdestroy() == var) {
+            ySpeed++;
+            var++;
+        }
+    }
+
+    /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    * /////////////////////////////////////////////////                  ON DRAW                   ///////////////////////////////////////////////////
+    * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+    public void ondraw(Canvas canvas){
+        update();
+        canvas.drawBitmap(bmp, x, y, null);
+    }
+
+    /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    * /////////////////////////////////////////////////                  REMOVE                   ///////////////////////////////////////////////////
+    * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+    public void remove(){
+        if(hit) {
+            destroy = true;
+            var = Joueur.getRockdestroy();
+            update();
+        }
+    }
+
+    /*/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    * /////////////////////////////////////////////                  X, Y, HEIGHT, WIDTH                 //////////////////////////////////////////////
+    * ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+    public static int getX(){
+        return x;
+    }
+
+    public static int getY(){
+        return y;
+    }
+
+    public static void setX(int x){
+        Roche.x = x;
+    }
+    public static void setY(int y){
+        Roche.y = y;
+    }
+
+    public static int getHeight(){
+        return height;
+    }
+
+    public static int getWidth(){
+        return width;
+    }
+
+    public static int getYSpeed(){
+        return ySpeed;
+    }
+
+    public static void setYSpeed(int ySpeed){
+        Roche.ySpeed = ySpeed;
+    }
+
+    public void looseLife(){
+        life --;
+    }
+
+    public int getLife(){
+        return life;
+    }
+
+    public static void isHit(){
+        hit = true;
+    }
+
+}

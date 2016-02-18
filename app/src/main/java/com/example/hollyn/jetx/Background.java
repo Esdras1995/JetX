@@ -32,7 +32,7 @@ public class Background extends View {
     public Background(Context context){
         super(context);
 
-        back = BitmapFactory.decodeResource(getResources(), R.drawable.backtest);
+        back = BitmapFactory.decodeResource(getResources(), R.drawable.background_ink2);
         rect = new Rect();
         int newHeight = getScreenDimensions(context).y;
         int newWidth = getScreenDimensions(context).x;
@@ -40,8 +40,7 @@ public class Background extends View {
         init = -back.getHeight();
     }
 
-    public void ondraw(Canvas canvas){
-        super.onDraw(canvas);
+    public void mdraw(Canvas canvas){
         width = canvas.getWidth();
         height = canvas.getHeight();
         Paint paint = new Paint();

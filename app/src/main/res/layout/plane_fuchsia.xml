@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/gray_center600_1024">
+
+    <ImageView
+        android:src="@drawable/fuchsia_shopping"
+        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="20dp"
+        android:id="@+id/imageView" />
+
+    <ImageView
+        android:src="@drawable/lock600_1024"
+        android:scaleType="fitCenter"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/caneda"
+        android:layout_marginBottom="7dp"
+        android:layout_above="@+id/imageButton4"
+        android:layout_toRightOf="@+id/imageButton3"
+        android:layout_toEndOf="@+id/imageButton3" />
+
+    <ImageButton
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:src="@drawable/button_firegun"
+        android:layout_margin="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/imageButton3" />
+
+    <ImageButton
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/unlock_button600_1024"
+        android:layout_margin="30dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/imageButton4" />
+
+</RelativeLayout>

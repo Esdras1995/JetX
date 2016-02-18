@@ -1,35 +1,44 @@
 package com.example.hollyn.jetx;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class Game extends Activity {
+public class Game extends FragmentActivity {
 
     private Roche roche;
     private GameView v;
-    private ImageButton b_pause;
+    private ImageButton b_pause, joge;
     private boolean pause, start = true;
-    private TextView nmbrLife, speedRock, nmbrCoin, setscore;
+    private TextView nmbrDiamand, nmbrCoin, setscore;
+    ImageView imageLife;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //v.getHolder().setFixedSize(200, 300);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         setContentView(R.layout.game_layout);
 
         v = (GameView)findViewById(R.id.gameView);
 
         b_pause = (ImageButton)findViewById(R.id.pause);
-        nmbrLife =(TextView)findViewById(R.id.life);
         nmbrCoin =(TextView)findViewById(R.id.coin);
-        speedRock =(TextView)findViewById(R.id.speed);
+        nmbrDiamand =(TextView)findViewById(R.id.diamand);
         setscore =(TextView)findViewById(R.id.setscore);
-
-        nmbrLife.setText(Integer.toString(Joueur.getLife()));
+        imageLife = (ImageView) findViewById(R.id.imageLife);
+        joge = (ImageButton) findViewById(R.id.joge);
 
         pause = false;
 
@@ -47,20 +56,24 @@ public class Game extends Activity {
                 }
             }
         });
+       // showDialog();
     }
 
-    public void setNmbrLife(final String txt){
-        Game.this.runOnUiThread(new Runnable() {
-            public void run() {
-                nmbrLife.setText(txt);
-            }
-        });
-    }
+    public void showDialog(){
+        FragmentManager manager = getSupportFragmentManager();
+        Begin begin = new Begin();
+        begin.show(manager, "touch_to_begin");
 
-    public void setSpeedRock(final String txt){
+    }
+/*
+*  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\        Set Score Board      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+*  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+    public void setNmbrDiamand(final String txt){
         Game.this.runOnUiThread(new Runnable() {
             public void run() {
-                speedRock.setText(txt);
+                nmbrDiamand.setText(txt);
             }
         });
     }
@@ -80,14 +93,125 @@ public class Game extends Activity {
         });
     }
 
+/*
+*  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\        Set life player      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+*  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+public void setLife(){
+    Game.this.runOnUiThread(new Runnable() {
+        public void run() {
+            switch (Joueur.getLife()){
+                case 1:
+                    imageLife.setImageResource(R.drawable.lifedone);
+                    break;
+
+                case 2:
+                    imageLife.setImageResource(R.drawable.lifesemi);
+                    break;
+
+                case 3:
+                    imageLife.setImageResource(R.drawable.life77);
+                    break;
+            }
+        }
+    });
+}
+
+/*
+*  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\        Set life player      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+*  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+public void setJoge(){
+    Game.this.runOnUiThread(new Runnable() {
+        public void run() {
+            switch (Joueur.getCoinGainedJoge()){
+                case 5:
+                    joge.setImageResource(R.drawable.progression1);
+                    joge.setEnabled(true);
+                    break;
+
+                case 10:
+                    joge.setImageResource(R.drawable.progression2);
+                    joge.setEnabled(true);
+                    break;
+
+                case 15:
+                    joge.setImageResource(R.drawable.progression3);
+                    joge.setEnabled(true);
+                    break;
+
+                case 20:
+                    joge.setImageResource(R.drawable.progression4);
+                    joge.setEnabled(true);
+                    break;
+
+                case 25:
+                    joge.setImageResource(R.drawable.progression5);
+                    joge.setEnabled(true);
+                    break;
+
+                case 30:
+                    joge.setImageResource(R.drawable.progression6);
+                    joge.setEnabled(true);
+                    break;
+
+                case 35:
+                    joge.setImageResource(R.drawable.progression7);
+                    joge.setEnabled(true);
+                    break;
+
+                case 40:
+                    joge.setImageResource(R.drawable.progression8);
+                    joge.setEnabled(true);
+                    break;
+
+                case 45:
+                    joge.setImageResource(R.drawable.progression9);
+                    joge.setEnabled(true);
+                    break;
+
+                case 50:
+                    joge.setImageResource(R.drawable.progression10);
+                    joge.setEnabled(true);
+                    break;
+
+                case 55:
+                    joge.setImageResource(R.drawable.progression11);
+                    joge.setEnabled(true);
+                    break;
+
+                case 60:
+                    joge.setImageResource(R.drawable.progression12);
+                    joge.setEnabled(true);
+                    joge.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Avion.ExplodeAll();
+                            Joueur.setAllExpl();
+                            joge.setEnabled(false);
+                            joge.setImageResource(R.drawable.progression1);
+                        }
+                    });
+                    break;
+            }
+        }
+    });
+}
+
+/*
+*  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+*  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\        Set Score Board      \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+*  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
     @Override
     protected void onPause() {
-        if(!v.pause) {
-            super.onPause();
-            onSaveInstanceState(new Bundle());
-            v.onPause1();
-        }
+        super.onPause();
+        onSaveInstanceState(new Bundle());
+        v.onPause1();
     }
+
 
     @Override
     protected void onResume() {

@@ -1,30 +1,30 @@
 package com.example.hollyn.jetx;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import java.util.Random;
 
 /**
  * Created by hollyn on 3/27/15.
  */
-public class Joueur extends Activity{
+public class Joueur{
 
-   // static int bestScore;
+    // static int bestScore;
 
     private static int life;
     private static int score;
     private static int rockdestroy;
     private long distance;
     private static int coinGain;
+    private static int diamandGain;
+    private static int allExpl;
 
     public Joueur(){
         score = 0;
         rockdestroy = 0;
-        life = 3;
+        life = 4;
         distance = 0;
         coinGain = 0;
+        diamandGain = 0;
+        allExpl = 0;
     }
 
     public void getBonus(){
@@ -54,8 +54,8 @@ public class Joueur extends Activity{
         Joueur.life = life;
     }
 
-    public void looseLife(){
-        life --;
+    public static void looseLife(int i){
+        life -= i;
     }
 
     public static int getRockdestroy(){
@@ -66,8 +66,8 @@ public class Joueur extends Activity{
         rockdestroy ++;
     }
 
-    public long  setAndGetDistance(){
-        return ++distance;
+    public void setDistance(){
+        ++distance;
     }
 
     public long getDistance(){
@@ -75,7 +75,7 @@ public class Joueur extends Activity{
     }
 
     public long getScore(){
-        return distance + rockdestroy + coinGain;
+        return distance + rockdestroy * 25 + coinGain * 2;
     }
 
     public static void gainCoin(){
@@ -88,5 +88,27 @@ public class Joueur extends Activity{
 
     public static void setCoinGain(){
         coinGain = 0;
+    }
+
+    public static void setAllExpl(){
+        allExpl = getCoinGained();
+    }
+
+    public static int getCoinGainedJoge() {
+        return getCoinGained() - allExpl;
+    }
+
+
+
+    public static void gainDiamand(){
+        diamandGain ++;
+    }
+
+    public static int getDiamandGained(){
+        return diamandGain;
+    }
+
+    public static void setDiamandGain(){
+        diamandGain = 0;
     }
 }

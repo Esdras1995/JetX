@@ -1,51 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    android:background="#181818"
+    android:background="@drawable/settings"
+    android:layout_gravity="center"
     android:orientation="horizontal"
-    android:layout_gravity="center_horizontal"
-    android:padding="20dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     >
+
+    <!--ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        /-->
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="199dp"
+    android:padding="10dp"
+    android:layout_marginTop="70dp"
+    android:background="@drawable/center_rect">
 
     <!--ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/back"
-        android:alpha="0.2"
-        android:id="@+id/imageV"/-->
+        android:id="@+id/imageView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" /-->
+    <ImageButton
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:id="@+id/music"
+        android:layout_marginTop="47dp"
+        android:background="@drawable/left_none_check"
+        android:layout_marginLeft="10dp"
+        />
 
-    <!--ToggleButton
-        android:layout_width="wrap_content"
+    <ImageButton
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:background="@drawable/right_none_check"
+        android:id="@+id/sfx"
+        android:layout_above="@+id/imageView2"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_alignEnd="@+id/imageView2"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="29dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/check_fx"
-        android:layout_gravity="center_vertical"
-        android:layout_below="@+id/check_music"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/music"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/bar"/>
+
+</RelativeLayout>
+
+    <ImageButton
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:id="@+id/imageButton"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/stats_pressed"/>
+
+    <ImageButton
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:id="@+id/credits"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="49dp" />
+        android:src="@drawable/credits_pressed"
+        android:background="@null"
+        android:scaleType="fitCenter"/>
 
-    <ToggleButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New ToggleButton"
-        android:id="@+id/check_music"
+    <!--ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/home"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/home_button"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" /-->
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        /-->
 
-
-
-    <Button
+    <!--Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Switch plane"
         android:id="@+id/button"
         android:layout_gravity="right"
         android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"/-->
 
-    <!-- android:background="#3118F0"-->
+    <!-- android:background="#3118F0">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,7 +112,7 @@
         android:id="@+id/save"
         android:layout_above="@+id/button"
         android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button" />
+        android:layout_alignStart="@+id/button" /-->
 
     <!--TextView
         android:layout_width="190dp"
@@ -66,7 +125,7 @@
         android:layout_alignParentStart="true"
         android:id="@+id/textView3" /-->
 
-    <TextView
+    <!--TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Music volume"
@@ -86,7 +145,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true" /-->
 
     <!--TextView
         android:layout_width="wrap_content"
@@ -98,7 +157,7 @@
         android:layout_alignTop="@+id/check_fx"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" /-->
-    <SeekBar
+    <!--SeekBar
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fxVolume"
@@ -130,6 +189,6 @@
         android:paddingTop="5dp"
         android:textColor="#ffffff"
         android:layout_alignBottom="@+id/button"
-        />
+        /-->
 
 </RelativeLayout>

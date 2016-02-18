@@ -24,7 +24,7 @@ public class Explosion {
     private List<Explosion> temps;
     private GameSound sound;
 
-    public Explosion(List<Explosion> temps, GameView gameView, int x, int y, Bitmap bitmap){
+    public Explosion(List<Explosion> temps, GameView gameView, int x, int y, Bitmap bitmap, GameSound sound){
         this.gameView = gameView;
         bmp = bitmap;
         width = bitmap.getWidth() / BMP_WIDTH;
@@ -32,6 +32,7 @@ public class Explosion {
         this.x = x;
         this.y = y;
         this.temps = temps;
+        sound.playSound("RocheExplosion");
         //sound.playFx("RocheExplosion", 15, 15);
     }
 
